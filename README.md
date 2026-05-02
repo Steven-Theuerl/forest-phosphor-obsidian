@@ -2,42 +2,63 @@
 
 A modern CRT phosphor monitor theme for Obsidian.
 
-Forest Phosphor evokes the look of an old phosphor terminal — saturated cyan, amber, and green glowing on dark glass — but with modern legibility and accent contrast. Built around three classic phosphor colors (P1 green, P3 amber, P11 blue/cyan) layered over a deep forest substrate.
-
 ![Forest Phosphor screenshot](screenshotHero.png)
 
-## On modes
+Saturated cyan, amber, and green glowing on dark glass — built around three classic phosphor types (P1 green, P3 amber, P11/P22 blue) layered over a deep forest substrate. Modern legibility, distinct accent contrast, and a glossy callout treatment that suggests phosphor bloom on glass.
 
-Forest Phosphor is a dark theme. The aesthetic — phosphor glow on dark glass — depends on saturated highlights against a deep substrate, and a paper variant would dilute the identity. Both Obsidian's light and dark mode resolve to the same Forest Phosphor palette, so you get the intended look regardless of the appearance setting and system auto-toggle just no-ops. The submission declares both modes for compatibility.
+Part of the [Forest Phosphor](https://forestphosphor.dev) family — a coordinated palette across Obsidian, VSCode, and iTerm2.
 
 ## Install
 
-**From the community gallery (once published):**
+**From the community gallery:**
 Settings → Appearance → Manage themes → Browse → search "Forest Phosphor"
 
-**Manual Installation:**
+**Manual install:**
 
-1. Download `theme.css` and `manifest.json` from the latest release.
-2. Place them in `<your-vault>/.obsidian/themes/Forest Phosphor/`.
-3. Settings → Appearance → Themes → select Forest Phosphor.
+1. Download `theme.css` and `manifest.json` from the [latest release](https://github.com/Steven-Theuerl/forest-phosphor-obsidian/releases/latest)
+2. Place them in `<your-vault>/.obsidian/themes/Forest Phosphor/`
+3. Settings → Appearance → Themes → select Forest Phosphor
 
-## Companion themes
+## On modes
 
-Forest Phosphor exists as a coordinated set across the developer stack:
+Forest Phosphor is dark-only by design. The aesthetic — phosphor glow on dark glass — depends on saturated highlights against a deep substrate; a paper variant would dilute the identity past the point of being the same theme.
 
-- **VSCode** — `Forest Phosphor` on the marketplace.
-- **iTerm2** — color preset on the same palette.
+The CSS handles light mode gracefully: both `.theme-light` and `.theme-dark` resolve to the same palette, so if you have system auto-toggle on, the toggle is just a no-op rather than a broken render.
 
-The Obsidian, VSCode, and iTerm palettes share the same color values.
+## Tested with
+
+Confirmed clean rendering with: Daily Notes, Templates, Tasks, Calendar, Outliner, Style Settings. Most well-behaved community plugins should compose fine since Forest Phosphor uses Obsidian's standard CSS variables. If you find one that breaks, open an issue.
 
 ## Customization
 
-The theme uses Obsidian's standard CSS variables, so it composes cleanly with the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin and any well-behaved snippet. To override any color, drop a snippet in `.obsidian/snippets/` redefining the relevant variable.
+The theme exposes the standard Obsidian variables, so a snippet in `.obsidian/snippets/` can override any single value without forking. For example, to make the callout glow more pronounced:
+
+​`css
+.callout {
+  box-shadow: inset 0 0 32px rgba(var(--callout-color), 0.08);
+}
+​`
+
+It also composes with the [Style Settings](https://github.com/mgmeyers/obsidian-style-settings) plugin if you'd rather tweak via UI.
+
+## Family
+
+- **Obsidian** — this theme
+- **VSCode** — [forest-phosphor-vscode](https://github.com/Steven-Theuerl/forest-phosphor-vscode)
+- **iTerm2** — [forest-phosphor-iterm](https://github.com/Steven-Theuerl/forest-phosphor-iterm)
+
+All three share the same hex values; switch between apps without losing the look.
+
+## Reporting issues
+
+If you find an unstyled element or a plugin that doesn't render right, open an issue with a screenshot and the plugin name. Themes have long tails; user reports are how those gaps get found.
+
+## About
+
+Built by Steven Theuerl (August) ([@Steven-Theuerl](https://github.com/Steven-Theuerl)). The full design system lives at [forestphosphor.dev](https://forestphosphor.dev). Palette reference: traditional CRT phosphor types P1 (green), P3 (amber), P11/P22 (blue).
+
+<!-- If you find Forest Phosphor useful and want to support continued work: [Buy me a coffee](https://buymeacoffee.com/your-handle) -->
 
 ## License
 
-MIT — see `LICENSE`.
-
-## Credits
-
-Theme by Steven Theuerl (August). Palette reference: traditional CRT phosphor types P1 (green), P3 (amber), P11/P22 (blue).
+MIT — see [LICENSE](./LICENSE).
