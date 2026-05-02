@@ -17,7 +17,7 @@ Settings → Appearance → Manage themes → Browse → search "Forest Phosphor
 
 **Manual Installation:**
 
-1. Download `ForestPhosphor.css` and `manifest.json` from the latest release.
+1. Download `theme.css` and `manifest.json` from the latest release.
 2. Place them in `<your-vault>/.obsidian/themes/Forest Phosphor/`.
 3. Settings → Appearance → Themes → select Forest Phosphor.
 
