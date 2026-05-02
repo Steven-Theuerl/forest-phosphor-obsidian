@@ -4,7 +4,7 @@ A modern CRT phosphor monitor theme for Obsidian.
 
 Forest Phosphor evokes the look of an old phosphor terminal — saturated cyan, amber, and green glowing on dark glass — but with modern legibility and accent contrast. Built around three classic phosphor colors (P1 green, P3 amber, P11 blue/cyan) layered over a deep forest substrate.
 
-![Forest Phosphor screenshot](ForestPhosphorScreenshot-Obsidian.png)
+![Forest Phosphor screenshot](screenshot.png)
 
 ## On modes
 
