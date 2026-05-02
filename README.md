@@ -45,7 +45,7 @@ It also composes with the [Style Settings](https://github.com/mgmeyers/obsidian-
 
 - **Obsidian** — this theme
 - **VSCode** — [forest-phosphor-vscode](https://github.com/Steven-Theuerl/forest-phosphor-vscode)
-- **iTerm2** — [forest-phosphor-iterm](https://github.com/Steven-Theuerl/forest-phosphor-iterm)
+- **iTerm2** — [forest-phosphor-iterm2](https://github.com/Steven-Theuerl/forest-phosphor-iterm2)
 
 All three share the same hex values; switch between apps without losing the look.
 
