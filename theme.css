@@ -15,8 +15,7 @@
        same dark palette. Users get Forest Phosphor regardless of Obsidian's
        appearance setting; system auto-toggle just no-ops.
    ----------------------------------------------------------------------------- */
-.theme-dark,
-.theme-light {
+.theme-dark {
   /* ---- Foundation: base color scale (used by Obsidian's derived vars) ---- */
   --color-base-00: #0f180c;       /* deepest bg — editor */
   --color-base-05: #0e170b;       /* chrome / titlebar / tabs */
