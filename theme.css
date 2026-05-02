@@ -1,0 +1,373 @@
+/* =============================================================================
+   FOREST PHOSPHOR — Obsidian community theme
+   A modern CRT phosphor monitor theme for Obsidian.
+   Dark theme by design; .theme-light and .theme-dark both resolve to the
+   Forest Phosphor palette so the look is consistent regardless of Obsidian's
+   appearance setting.
+   ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   1. THEME PALETTE — Forest Phosphor
+       Forest Phosphor is a dark theme, full stop. The aesthetic — phosphor glow
+       on dark glass — depends on saturated highlights against a deep substrate
+       and doesn't translate to a light background. Rather than ship a watered-
+       down paper variant, both .theme-light and .theme-dark resolve to the
+       same dark palette. Users get Forest Phosphor regardless of Obsidian's
+       appearance setting; system auto-toggle just no-ops.
+   ----------------------------------------------------------------------------- */
+.theme-dark,
+.theme-light {
+  /* ---- Foundation: base color scale (used by Obsidian's derived vars) ---- */
+  --color-base-00: #0f180c;       /* deepest bg — editor */
+  --color-base-05: #0e170b;       /* chrome / titlebar / tabs */
+  --color-base-10: #101c0c;       /* sidebar */
+  --color-base-20: #131c10;       /* elevated surfaces */
+  --color-base-25: #1a2c16;       /* selected */
+  --color-base-30: #1e3119;       /* subtle border */
+  --color-base-35: #2e4a29;       /* medium border */
+  --color-base-40: #3d5e39;       /* dim fg */
+  --color-base-50: #4e7249;       /* muted fg */
+  --color-base-60: #5c8656;       /* comment green */
+  --color-base-70: #7cbf78;       /* heading fg */
+  --color-base-100: #a2eba1;      /* primary fg — phosphor green */
+
+  --color-base-bg1: #0f180c;
+  --color-base-bg2: #0e170b;
+
+  /* ---- Foundation: accent palette ---- */
+  --color-red:     #f8906e;
+  --color-orange:  #d4a24a;
+  --color-yellow:  #d4d256;
+  --color-green:   #5ae66a;
+  --color-cyan:    #7af8ff;       /* the phosphor */
+  --color-blue:    #77b0ff;
+  --color-purple:  #c07ac8;
+  --color-pink:    #c07ac8;
+
+  --color-red-rgb:    248, 144, 110;
+  --color-orange-rgb: 212, 162, 74;
+  --color-yellow-rgb: 212, 210, 86;
+  --color-green-rgb:  90, 230, 106;
+  --color-cyan-rgb:   122, 248, 255;
+  --color-blue-rgb:   119, 176, 255;
+  --color-purple-rgb: 192, 122, 200;
+
+  /* ---- Accent (primary brand color: phosphor cyan) ---- */
+  --color-accent: #7af8ff;
+  --color-accent-1: #a2eba1;       /* hover lifts toward green */
+  --color-accent-2: #7af8ff;
+  --color-accent-hsl: 184, 100%, 74%;
+  --interactive-accent: #7af8ff;
+  --interactive-accent-hover: #a2eba1;
+  --text-on-accent: #0f180c;
+  --text-on-accent-inverted: #0f180c;
+
+  /* ---- Backgrounds (Obsidian semantic layer) ---- */
+  --background-primary: #0f180c;
+  --background-primary-alt: #131c10;
+  --background-secondary: #101c0c;
+  --background-secondary-alt: #0e170b;
+  --background-modifier-border: #1e3119;
+  --background-modifier-border-hover: #2e4a29;
+  --background-modifier-border-focus: #7af8ff;
+  --background-modifier-hover: #131c10;
+  --background-modifier-active-hover: #1a2c16;
+  --background-modifier-form-field: #101c0c;
+  --background-modifier-form-field-highlighted: #131c10;
+  --background-modifier-message: #131c10;
+  --background-modifier-success: rgba(90, 230, 106, 0.12);
+  --background-modifier-error: rgba(248, 144, 110, 0.12);
+  --background-modifier-error-hover: rgba(248, 144, 110, 0.2);
+  --background-modifier-error-rgb: 248, 144, 110;
+
+  /* ---- Text ---- */
+  --text-normal: #a2eba1;
+  --text-muted: #7cbf78;
+  --text-faint: #4e7249;
+  --text-accent: #7af8ff;
+  --text-accent-hover: #a2eba1;
+  --text-error: #f8906e;
+  --text-success: #5ae66a;
+  --text-warning: #d4a24a;
+  --text-selection: rgba(74, 122, 204, 0.35);
+  --text-highlight-bg: rgba(212, 162, 74, 0.28);
+  --text-highlight-bg-rgb: 212, 162, 74;
+
+  /* ---- Interactive (buttons / inputs) ---- */
+  --interactive-normal: #1e3119;
+  --interactive-hover: #2e4a29;
+
+  /* ---- Headings ---- */
+  --h1-color: #7af8ff;
+  --h2-color: #7af8ff;
+  --h3-color: #7af8ff;
+  --h4-color: #7cbf78;
+  --h5-color: #7cbf78;
+  --h6-color: #4e7249;
+
+  /* ---- Links ---- */
+  --link-color: #328eee;
+  --link-color-hover: #7af8ff;
+  --link-external-color: #328eee;
+  --link-external-color-hover: #7af8ff;
+  --link-unresolved-color: #f8906e;
+  --link-unresolved-opacity: 0.75;
+  --link-unresolved-filter: none;
+
+  /* ---- Tags ---- */
+  --tag-color: #7af8ff;
+  --tag-color-hover: #a2eba1;
+  --tag-background: rgba(122, 248, 255, 0.10);
+  --tag-background-hover: rgba(122, 248, 255, 0.18);
+  --tag-border-color: transparent;
+  --tag-border-color-hover: rgba(122, 248, 255, 0.4);
+
+  /* ---- Code (inline + block, Obsidian markdown vars) ---- */
+  --code-background: #131c10;
+  --code-normal: #7af8ff;
+  --code-comment: #5c8656;
+  --code-keyword: #f8906e;
+  --code-string: #73e165;
+  --code-function: #77b0ff;
+  --code-property: #d4d256;
+  --code-tag: #f8906e;
+  --code-value: #7af8ff;
+  --code-operator: #7af8ff;
+  --code-punctuation: rgba(122, 248, 255, 0.65);
+  --code-important: #f8906e;
+  --code-imports: #c07ac8;
+
+  /* ---- Bold / italic markdown ---- */
+  --bold-color: #f8906e;
+  --bold-weight: 700;
+  --italic-color: #d4d256;
+
+  /* ---- Lists / blockquote ---- */
+  --list-marker-color: #7af8ff;
+  --blockquote-border-color: #7af8ff;
+  --blockquote-color: #7cbf78;
+  --blockquote-background-color: #131c10;
+
+  /* ---- Tables ---- */
+  --table-header-background: #131c10;
+  --table-header-color: #7af8ff;
+  --table-text-color: #a2eba1;
+  --table-row-alt-background: rgba(19, 28, 16, 0.4);
+  --table-border-color: #1e3119;
+
+  /* ---- HR ---- */
+  --hr-color: #1e3119;
+
+  /* ---- Scrollbars ---- */
+  --scrollbar-bg: transparent;
+  --scrollbar-thumb-bg: rgba(46, 74, 41, 0.4);
+  --scrollbar-active-thumb-bg: rgba(61, 94, 57, 0.75);
+
+  /* ---- Cursor ---- */
+  --caret-color: #ffffff;
+
+  /* ---- Modals / popups ---- */
+  --modal-background: #0e170b;
+  --modal-border-color: #1e3119;
+
+  /* ---- Status / nav ---- */
+  --titlebar-background: #0e170b;
+  --titlebar-background-focused: #0e170b;
+  --titlebar-text-color: #a2eba1;
+  --titlebar-text-color-focused: #a2eba1;
+  --status-bar-background: #0e170b;
+  --status-bar-text-color: #7af8ff;
+  --status-bar-border-color: #1e3119;
+
+  --nav-item-color: #a2eba1;
+  --nav-item-color-hover: #a2eba1;
+  --nav-item-color-active: #7af8ff;
+  --nav-item-color-selected: #7af8ff;
+  --nav-item-background-hover: #131c10;
+  --nav-item-background-active: #1a2c16;
+  --nav-item-background-selected: #1a2c16;
+
+  --tab-text-color: #4e7249;
+  --tab-text-color-focused: #a2eba1;
+  --tab-text-color-focused-active: #a2eba1;
+  --tab-background-active: #0f180c;
+  --tab-outline-color: #1e3119;
+
+  --ribbon-background: #0e170b;
+  --ribbon-background-collapsed: #0e170b;
+
+  /* ---- Graph view ---- */
+  --graph-line: #1e3119;
+  --graph-node: #7cbf78;
+  --graph-node-unresolved: #f8906e;
+  --graph-node-focused: #7af8ff;
+  --graph-node-tag: #c07ac8;
+  --graph-node-attachment: #d4d256;
+  --graph-text: #a2eba1;
+
+  /* ---- Search ---- */
+  --search-result-background: transparent;
+  --text-highlight-bg: rgba(212, 162, 74, 0.28);
+
+  /* ---- Embed ---- */
+  --embed-border-left: 2px solid #7af8ff;
+  --embed-padding: 0 1em;
+
+  /* ---- Callouts (the eight standard types) ---- */
+  --callout-note: var(--color-blue-rgb);
+  --callout-info: var(--color-blue-rgb);
+  --callout-todo: var(--color-blue-rgb);
+  --callout-tip: var(--color-purple-rgb);
+  --callout-success: var(--color-green-rgb);
+  --callout-question: var(--color-yellow-rgb);
+  --callout-warning: var(--color-orange-rgb);
+  --callout-failure: var(--color-red-rgb);
+  --callout-danger: var(--color-red-rgb);
+  --callout-bug: var(--color-red-rgb);
+  --callout-example: var(--color-purple-rgb);
+  --callout-quote: 124, 191, 120;
+
+  /* ---- Selection ---- */
+  --selection-background: rgba(74, 122, 204, 0.35);
+}
+
+/* =============================================================================
+   2. TYPOGRAPHY & EDITOR REFINEMENTS
+   ============================================================================= */
+
+/* Comments — italic */
+.cm-comment,
+.cm-line .cm-comment,
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  font-style: italic;
+}
+
+/* Inline code — bordered chip */
+code:not(pre code),
+.markdown-rendered code:not(pre code),
+.cm-inline-code {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+  font-size: 0.9em;
+}
+
+/* Code blocks */
+.markdown-rendered pre,
+pre[class*='language-'] {
+  border: 1px solid var(--background-modifier-border);
+  border-radius: 6px;
+  padding: 1em;
+}
+
+/* H1 / H2 underline accent — keeps the CRT divider feel */
+.markdown-rendered h1,
+.cm-header-1 {
+  border-bottom: 1px solid var(--background-modifier-border);
+  padding-bottom: 0.3em;
+}
+.markdown-rendered h2,
+.cm-header-2 {
+  border-bottom: 1px solid var(--background-modifier-border);
+  padding-bottom: 0.2em;
+}
+
+/* Disable code-ligatures (faithfulness to CRT vibe — chars render discrete) */
+code,
+.cm-editor,
+pre {
+  font-variant-ligatures: none;
+}
+
+/* Strip Prism per-token backgrounds inside code blocks (dark mode only —
+   the elevated-block bg already provides the surface) */
+.markdown-rendered pre code span {
+  background-color: transparent !important;
+}
+
+/* =============================================================================
+   3. PRISM TOKEN MAPPING — for non-CodeMirror code blocks in reading view
+   ============================================================================= */
+
+.token.comment, .token.prolog, .token.doctype, .token.cdata {
+  color: var(--code-comment);
+}
+.token.keyword, .token.storage, .token.important,
+.token.atrule, .token.rule {
+  color: var(--code-keyword);
+}
+.token.operator, .token.entity, .token.url {
+  color: var(--code-operator);
+}
+.token.string, .token.char, .token.attr-value, .token.regex {
+  color: var(--code-string);
+}
+.token.template-punctuation, .token.interpolation-punctuation {
+  color: var(--code-keyword);
+}
+.token.interpolation { color: var(--text-normal); }
+.token.number, .token.boolean, .token.constant, .token.symbol {
+  color: var(--code-value);
+}
+.token.function, .token.builtin {
+  color: var(--code-function);
+}
+.token.method, .token.function-variable {
+  color: var(--code-function);
+  font-style: italic;
+}
+.token.class-name, .token.interface,
+.token.namespace, .token.maybe-class-name {
+  color: var(--code-imports);
+}
+.token.property, .token.tag,
+.token.attr-name, .token.property-access {
+  color: var(--code-property);
+}
+.token.parameter {
+  color: var(--code-property);
+  font-style: italic;
+  opacity: 0.85;
+}
+.token.punctuation { color: var(--code-punctuation); }
+.token.variable { color: var(--text-normal); }
+
+/* CSS-specific */
+.token.selector { color: var(--code-property); }
+.token.unit { color: var(--code-keyword); opacity: 0.85; }
+.token.hexcode, .token.color { color: var(--code-value); }
+.token.pseudo-class, .token.pseudo-element {
+  color: var(--code-imports);
+  font-style: italic;
+}
+
+/* Diff / git */
+.token.deleted { color: var(--text-warning); }
+.token.inserted { color: var(--text-success); }
+
+/* Decorators / annotations */
+.token.decorator, .token.annotation {
+  color: var(--code-imports);
+  font-style: italic;
+}
+
+/* Invalid / deprecated */
+.token.invalid {
+  color: var(--text-error);
+  text-decoration: underline;
+}
+.token.deprecated {
+  text-decoration: line-through;
+  opacity: 0.7;
+}
+
+/* =============================================================================
+   4. CALLOUT REFINEMENTS — slight inner glow for the CRT-bloom feel
+   ============================================================================= */
+
+.callout {
+  box-shadow: inset 0 0 24px rgba(var(--callout-color), 0.04);
+}
