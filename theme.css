@@ -35,18 +35,24 @@
   --fp-phosphor:        #7af8ff;
   --fp-phosphor-soft:   #7af8ffcc;
   --fp-phosphor-dim:    #7af8ffaa;
-  --fp-coral:           #f8906e;
-  --fp-coral-soft:      #f8906ecc;
+  --fp-coral:           #ea9575;
+  --fp-coral-soft:      #ea9575cc;
   --fp-blue:            #77b0ff;
   --fp-blue-link:       #328eee;
   --fp-magenta:         #c07ac8;
   --fp-magenta-soft:    #c07ac8cc;
-  --fp-yellow:          #d4d256;
+  --fp-orchid:          #ffb4e2;       /* abstract types — interfaces, generics, primitives */
+  --fp-amber:           #e8a030;       /* structural keywords — function, class, return, import */
+  --fp-yellow:          #d4d256;       /* CSS-specific yellow (ids/classes), markdown italic */
   --fp-yellow-soft:     #d4d256cc;
+  --fp-yellow-fn:       #d1cf32;       /* function/method names in code */
+  --fp-white:           #e8f0e8;       /* literal values — numbers, booleans, null, lifetimes, delimiters */
   --fp-green-string:    #73e165;
   --fp-green-comment:   #5c8656;
+  --fp-green-doc:       #7cbf78;       /* JSDoc/TSDoc tags */
+  --fp-deprecated:      #dd7975;       /* desaturated coral, strikethrough */
 
-  --fp-error:           #f8906e;
+  --fp-error:           #ea9575;
   --fp-warning:         #d4a24a;
   --fp-info:            #77b0ff;
   --fp-success:         #5ae66a;
@@ -69,22 +75,23 @@
   --color-base-bg2: #0e170b;
 
   /* ---- Foundation: accent palette ---- */
-  --color-red:     #f8906e;
+  --color-red:     #ea9575;
   --color-orange:  #d4a24a;
   --color-yellow:  #d4d256;
   --color-green:   #5ae66a;
   --color-cyan:    #7af8ff;
   --color-blue:    #77b0ff;
   --color-purple:  #c07ac8;
-  --color-pink:    #c07ac8;
+  --color-pink:    #ffb4e2;
 
-  --color-red-rgb:    248, 144, 110;
+  --color-red-rgb:    234, 149, 117;
   --color-orange-rgb: 212, 162, 74;
   --color-yellow-rgb: 212, 210, 86;
   --color-green-rgb:  90, 230, 106;
   --color-cyan-rgb:   122, 248, 255;
   --color-blue-rgb:   119, 176, 255;
   --color-purple-rgb: 192, 122, 200;
+  --color-pink-rgb:   255, 180, 226;
 
   /* ---- Accent (primary brand color: phosphor cyan) ---- */
   --color-accent: #7af8ff;
@@ -110,9 +117,9 @@
   --background-modifier-form-field-highlighted: var(--fp-bg-elevated);
   --background-modifier-message: var(--fp-bg-elevated);
   --background-modifier-success: rgba(90, 230, 106, 0.12);
-  --background-modifier-error: rgba(248, 144, 110, 0.12);
-  --background-modifier-error-hover: rgba(248, 144, 110, 0.2);
-  --background-modifier-error-rgb: 248, 144, 110;
+  --background-modifier-error: rgba(234, 149, 117, 0.12);
+  --background-modifier-error-hover: rgba(234, 149, 117, 0.2);
+  --background-modifier-error-rgb: 234, 149, 117;
 
   /* ---- Text ---- */
   --text-normal: var(--fp-fg-primary);
@@ -158,19 +165,22 @@
   --tag-border-color-hover: rgba(122, 248, 255, 0.4);
 
   /* ---- Code (inline + block, Obsidian markdown vars) ---- */
+  /* Mapped to Forest Phosphor source-of-truth role assignments:
+     keywords→amber (structural), tags→amber, functions→yellow,
+     properties→blue, values/numbers→white, imports→amber. */
   --code-background: var(--fp-bg-elevated);
-  --code-normal: var(--fp-phosphor);
+  --code-normal: var(--fp-fg-primary);
   --code-comment: var(--fp-green-comment);
-  --code-keyword: var(--fp-coral);
+  --code-keyword: var(--fp-amber);
   --code-string: var(--fp-green-string);
-  --code-function: var(--fp-blue);
-  --code-property: var(--fp-yellow);
-  --code-tag: var(--fp-coral);
-  --code-value: var(--fp-phosphor);
-  --code-operator: var(--fp-phosphor);
-  --code-punctuation: var(--fp-phosphor-dim);
+  --code-function: var(--fp-yellow-fn);
+  --code-property: var(--fp-blue);
+  --code-tag: var(--fp-amber);
+  --code-value: var(--fp-white);
+  --code-operator: var(--fp-fg-primary);
+  --code-punctuation: var(--fp-fg-primary);
   --code-important: var(--fp-coral);
-  --code-imports: var(--fp-magenta);
+  --code-imports: var(--fp-amber);
 
   /* ---- Bold / italic markdown ---- */
   --bold-color: var(--fp-coral);
@@ -457,8 +467,12 @@ pre {
 
 /* =============================================================================
    4. CODE BLOCKS — Prism token mapping
-       Matches VSCode TextMate tokenColors as closely as Prism's coarser
-       category model allows.
+       Maps Prism's `.token.*` classes to the Forest Phosphor source-of-truth
+       role assignments (see Forest_Phosphor-color-theme.json). Prism's
+       category model is coarser than VSCode's TextMate scopes, so a few
+       tokens collapse roles (e.g. .token.keyword covers both flow and
+       structural keywords — we resolve to amber since structural is more
+       informative when only one color is available).
    ============================================================================= */
 
 /* Specificity (0,2,1) beats Prism's `pre[class*="language-"]` (0,1,1); source
@@ -486,7 +500,7 @@ pre[class*="language-"] code {
   background-color: transparent;
 }
 
-/* Comments — italic */
+/* Comments — muted forest green, italic */
 .token.comment,
 .token.prolog,
 .token.doctype,
@@ -495,23 +509,7 @@ pre[class*="language-"] code {
   font-style: italic;
 }
 
-/* Keywords, control flow, storage */
-.token.keyword,
-.token.storage,
-.token.important,
-.token.atrule,
-.token.rule {
-  color: var(--fp-coral);
-}
-
-/* Operators */
-.token.operator,
-.token.entity,
-.token.url {
-  color: var(--fp-phosphor-soft);
-}
-
-/* Strings */
+/* Strings — bright green. Includes attr-value (HTML/JSX), regex content, chars. */
 .token.string,
 .token.char,
 .token.attr-value,
@@ -519,86 +517,150 @@ pre[class*="language-"] code {
   color: var(--fp-green-string);
 }
 
-/* Template literal interpolation */
+/* Structural keywords — amber.
+   Prism's .token.keyword conflates flow keywords (if/else/return) with
+   structural ones (function/class/import). Amber is the source-of-truth
+   color for the structural set; the few flow keywords that fall through
+   read fine in amber. .storage covers `let`/`var`/`const` declarations,
+   .atrule covers CSS @media/@import, .important covers CSS !important. */
+.token.keyword,
+.token.storage,
+.token.atrule,
+.token.rule,
+.token.important {
+  color: var(--fp-amber);
+}
+
+/* Operators — read with the foreground; they're part of the language flow. */
+.token.operator,
+.token.entity,
+.token.url {
+  color: var(--fp-fg-primary);
+}
+
+/* Punctuation — foreground. Brackets, semicolons, commas should not shout. */
+.token.punctuation {
+  color: var(--fp-fg-primary);
+}
+
+/* Template literal delimiters — white (special syntax delimiter, not attention). */
 .token.template-punctuation,
 .token.interpolation-punctuation {
-  color: var(--fp-coral);
+  color: var(--fp-white);
 }
 .token.interpolation {
   color: var(--fp-fg-primary);
 }
 
-/* Numbers, constants, booleans */
+/* Literal values — numbers, booleans, null/undefined — near-white. */
 .token.number,
-.token.boolean,
+.token.boolean {
+  color: var(--fp-white);
+}
+
+/* Constants & symbols — cyan (variables/macros/enum members). */
 .token.constant,
 .token.symbol {
   color: var(--fp-phosphor);
 }
 
-/* Functions, builtins */
+/* Function & method calls — yellow. Same color for declarations and calls. */
 .token.function,
-.token.builtin {
-  color: var(--fp-blue);
-}
-
-/* Method calls — italic blue */
 .token.method,
 .token.function-variable {
-  color: var(--fp-blue);
-  font-style: italic;
+  color: var(--fp-yellow-fn);
 }
 
-/* Types, classes, interfaces */
+/* Built-ins (console, Object, Promise, len, …) — cyan.
+   Prism tags both built-in objects and built-in functions as .builtin;
+   leaving them cyan groups them with variables/macros, which reads
+   correctly for `console.log` (cyan object → blue prop → yellow call). */
+.token.builtin {
+  color: var(--fp-phosphor);
+}
+
+/* Concrete shapes — classes, structs, enums — purple. */
 .token.class-name,
-.token.interface,
 .token.namespace,
 .token.maybe-class-name {
   color: var(--fp-magenta);
 }
 
-/* Properties, fields, attributes */
-.token.property,
-.token.tag,
-.token.attr-name,
-.token.property-access {
-  color: var(--fp-yellow);
+/* Abstract shapes — interfaces, type aliases, generics, primitives — pink.
+   Prism's .interface fires for TS interface declarations. .token.type-name
+   (some grammars) covers type aliases. */
+.token.interface,
+.token.type-name {
+  color: var(--fp-orchid);
 }
 
-/* Function parameters — italic dim yellow */
+/* Properties, fields, object keys, HTML/XML attribute names — blue. */
+.token.property,
+.token.attr-name,
+.token.property-access {
+  color: var(--fp-blue);
+}
+
+/* Tags (HTML/XML/JSX) — amber. Tag is structural; same color as keyword. */
+.token.tag {
+  color: var(--fp-amber);
+}
+
+/* Variables — cyan. */
+.token.variable {
+  color: var(--fp-phosphor);
+}
+
+/* Function parameters — foreground italic. */
 .token.parameter {
-  color: var(--fp-yellow-soft);
+  color: var(--fp-fg-primary);
   font-style: italic;
 }
 
-/* Punctuation */
-.token.punctuation {
-  color: var(--fp-phosphor-dim);
-}
-
-/* Variables */
-.token.variable {
-  color: var(--fp-fg-primary);
-}
-
-/* CSS-specific tokens */
-.token.selector {
-  color: var(--fp-yellow);
-}
-.token.unit {
-  color: var(--fp-coral-soft);
-}
-.token.hexcode,
-.token.color {
-  color: var(--fp-phosphor);
-}
-.token.pseudo-class,
-.token.pseudo-element {
+/* Decorators — purple, italic. Concrete attached metadata (Python @decorator,
+   TS @inject, Rust #[derive] is .meta below). */
+.token.decorator,
+.token.annotation {
   color: var(--fp-magenta);
   font-style: italic;
 }
 
-/* Diff / git */
+/* Rust-style attributes / metadata — purple. */
+.token.meta {
+  color: var(--fp-magenta);
+}
+
+/* CSS-specific tokens
+   ------------------------------------------------------------------------- */
+
+/* CSS class & id selectors — secondary yellow (ids/classes get their own
+   yellow per the source-of-truth design philosophy). */
+.token.selector,
+.token.selector .class,
+.token.selector .id {
+  color: var(--fp-yellow);
+}
+
+/* CSS units (px, em, rem, %) — foreground; they read with the number. */
+.token.unit {
+  color: var(--fp-fg-primary);
+}
+
+/* CSS hex codes / color literals — white (literal value). */
+.token.hexcode,
+.token.color {
+  color: var(--fp-white);
+}
+
+/* CSS pseudo-classes & pseudo-elements — pink (abstract type/contract). */
+.token.pseudo-class,
+.token.pseudo-element {
+  color: var(--fp-orchid);
+  font-style: italic;
+}
+
+/* Diff / git
+   ------------------------------------------------------------------------- */
 .token.deleted {
   color: var(--fp-warning);
 }
@@ -606,20 +668,14 @@ pre[class*="language-"] code {
   color: var(--fp-success);
 }
 
-/* Decorators — italic magenta */
-.token.decorator,
-.token.annotation {
-  color: var(--fp-magenta);
-  font-style: italic;
-}
-
-/* Invalid / deprecated */
+/* Invalid / deprecated
+   ------------------------------------------------------------------------- */
 .token.invalid {
   color: var(--fp-error);
   text-decoration: underline;
 }
 .token.deprecated {
-  color: #dd7975;
+  color: var(--fp-deprecated);
   text-decoration: line-through;
 }
 
@@ -673,7 +729,7 @@ pre[class*="language-"] code {
 .callout[data-callout="danger"],
 .callout[data-callout="error"],
 .callout[data-callout="bug"] {
-  --callout-color: 248, 144, 110;
+  --callout-color: 234, 149, 117;
 }
 .callout[data-callout="example"] {
   --callout-color: 192, 122, 200;
