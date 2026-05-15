@@ -2,7 +2,7 @@
 
 A modern CRT phosphor monitor theme for Obsidian.
 
-![Forest Phosphor screenshot](screenshotHero.png)
+![Forest Phosphor screenshot](screenshotHero.webp)
 
 Saturated cyan, amber, and green glowing on dark glass — built around three classic phosphor types (P1 green, P3 amber, P11/P22 blue) layered over a deep forest substrate. Modern legibility, distinct accent contrast, and a glossy callout treatment that suggests phosphor bloom on glass.
 
