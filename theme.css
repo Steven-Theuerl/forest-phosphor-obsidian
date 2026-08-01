@@ -1310,38 +1310,38 @@ pre[class*="language-"] code {
    ============================================================================= */
 
 .callout {
-  background-color: rgba(var(--callout-color), 0.08);
+  background-color: color-mix(in srgb, var(--callout-color) 8%, transparent);
   border-radius: 6px;
-  border: 1px solid rgba(var(--callout-color), 0.35);
-  box-shadow: inset 0 0 24px rgba(var(--callout-color), 0.04);
+  border: 1px solid color-mix(in srgb, var(--callout-color) 35%, transparent);
+  box-shadow: inset 0 0 24px color-mix(in srgb, var(--callout-color) 4%, transparent);
 }
 
 .callout[data-callout="note"] {
-  --callout-color: 100, 200, 255;
+  --callout-color: rgb(100, 200, 255);
 }
 .callout[data-callout="info"],
 .callout[data-callout="todo"] {
-  --callout-color: 119, 176, 255;
+  --callout-color: rgb(119, 176, 255);
 }
 .callout[data-callout="tip"],
 .callout[data-callout="hint"],
 .callout[data-callout="important"] {
-  --callout-color: 192, 122, 200;
+  --callout-color: rgb(192, 122, 200);
 }
 .callout[data-callout="success"],
 .callout[data-callout="check"],
 .callout[data-callout="done"] {
-  --callout-color: 90, 230, 106;
+  --callout-color: rgb(90, 230, 106);
 }
 .callout[data-callout="question"],
 .callout[data-callout="help"],
 .callout[data-callout="faq"] {
-  --callout-color: 212, 210, 86;
+  --callout-color: rgb(212, 210, 86);
 }
 .callout[data-callout="warning"],
 .callout[data-callout="caution"],
 .callout[data-callout="attention"] {
-  --callout-color: 212, 162, 74;
+  --callout-color: rgb(212, 162, 74);
 }
 .callout[data-callout="failure"],
 .callout[data-callout="fail"],
@@ -1349,14 +1349,14 @@ pre[class*="language-"] code {
 .callout[data-callout="danger"],
 .callout[data-callout="error"],
 .callout[data-callout="bug"] {
-  --callout-color: 234, 149, 117;
+  --callout-color: rgb(234, 149, 117);
 }
 .callout[data-callout="example"] {
-  --callout-color: 192, 122, 200;
+  --callout-color: rgb(192, 122, 200);
 }
 .callout[data-callout="quote"],
 .callout[data-callout="cite"] {
-  --callout-color: 124, 191, 120;
+  --callout-color: rgb(124, 191, 120);
 }
 
 /* =============================================================================
